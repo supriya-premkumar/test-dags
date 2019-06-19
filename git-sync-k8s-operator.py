@@ -52,6 +52,7 @@ try:
         get_logs=True,
         dag=dag,
         is_delete_operator_pod=False,
+        git_sync=True,
     )
 
 except ImportError as e:
