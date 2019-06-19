@@ -38,7 +38,7 @@ try:
     }
 
     dag = DAG(
-        dag_id='example-k8s-operator',
+        dag_id='git-sync-k8s-operator',
         default_args=args,
         schedule_interval=None)
 
