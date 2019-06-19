@@ -25,6 +25,8 @@ import datetime
 
 log = LoggingMixin().log
 
+configmaps = ["airflow-configmap"]
+
 try:
     # Kubernetes is optional, so not available in vanilla Airflow
     # pip install 'apache-airflow[kubernetes]'
@@ -52,7 +54,7 @@ try:
         get_logs=True,
         dag=dag,
         is_delete_operator_pod=False,
-        git_sync=True,
+        configmaps=configmaps,
     )
 
 except ImportError as e:
