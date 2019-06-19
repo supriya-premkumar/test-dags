@@ -48,7 +48,7 @@ try:
         labels={"foo": "bar"},
         name="airflow-test-pod",
         in_cluster=True,
-        task_id="task",
+        task_id="task-1",
         get_logs=True,
         dag=dag,
         is_delete_operator_pod=False,
