@@ -47,7 +47,7 @@ try:
         arguments=["echo", "20"],
         labels={"foo": "bar"},
         name="airflow-test-pod",
-        in_cluster=True,
+        in_cluster=False,
         task_id="task",
         get_logs=True,
         dag=dag,
