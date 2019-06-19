@@ -46,7 +46,7 @@ try:
         namespace='airflow',
         image="ubuntu:16.04",
         cmds=["bash", "-cx"],
-        arguments=["ls", "/root"],
+        arguments=["ls", "/root/airflow"],
         labels={"foo": "bar"},
         name="airflow-test-pod",
         in_cluster=True,
