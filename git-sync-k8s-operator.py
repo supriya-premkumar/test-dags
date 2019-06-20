@@ -41,7 +41,7 @@ try:
         dag_id='git-sync-k8s-operator',
         default_args=args,
         schedule_interval='@hourly',
-        start_date='YESTERDAY')
+        start_date=days_ago(2))
 
     k1 = KubernetesPodOperator(
         namespace='airflow',
