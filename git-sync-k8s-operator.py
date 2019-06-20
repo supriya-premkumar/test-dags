@@ -78,5 +78,7 @@ except ImportError as e:
     log.warn("Install kubernetes dependencies with: "
              "    pip install 'apache-airflow[kubernetes]'")
 
-k1.set_upstream(start)
-k2.set_upstream(start)
+# k1.set_upstream(start)
+# k2.set_upstream(start)
+
+k1 >> k2
