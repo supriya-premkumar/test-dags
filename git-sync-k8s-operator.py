@@ -40,18 +40,34 @@ try:
     dag = DAG(
         dag_id='git-sync-k8s-operator',
         default_args=args,
-        schedule_interval='@hourly')
+        schedule_interval='@hourly',
+        start_date='YESTERDAY')
 
-    k = KubernetesPodOperator(
+    k1 = KubernetesPodOperator(
         namespace='airflow',
         image="ubuntu:16.04",
         cmds=["bash", "-cx"],
         arguments=["ls", "/root/airflow"],
         labels={"foo": "bar"},
-        name="airflow-test-pod",
+        name="first-task",
         in_cluster=True,
         task_id="task-1",
         get_logs=True,
+        dag=dag,
+        is_delete_operator_pod=False,
+        configmaps=configmaps,
+    )
+
+    k2 = KubernetesPodOperator(
+        namespace='airflow',
+        image="Python:3.6",
+        cmds=["Python","-c"],
+        arguments=["print('hello world!')"],
+        labels={"foo": "bar"},
+        name="second-task",
+        task_id="task-2",
+        get_logs=True,
+        in_cluster=True,
         dag=dag,
         is_delete_operator_pod=False,
         configmaps=configmaps,
@@ -61,3 +77,6 @@ except ImportError as e:
     log.warn("Could not import KubernetesPodOperator: " + str(e))
     log.warn("Install kubernetes dependencies with: "
              "    pip install 'apache-airflow[kubernetes]'")
+
+k1.set_upstream(start)
+k2.set_upstream(start)
