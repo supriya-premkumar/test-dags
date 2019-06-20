@@ -40,7 +40,7 @@ try:
     dag = DAG(
         dag_id='git-sync-k8s-operator',
         default_args=args,
-        schedule_interval=None)
+        schedule_interval='@hourly')
 
     k = KubernetesPodOperator(
         namespace='airflow',
